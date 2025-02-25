@@ -1,0 +1,1035 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "62921c23-50db-48fa-a77d-b52f8cf63a6f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import ipyvolume as ipv\n",
+    "import numpy as np\n",
+    "import ipywidgets as widgets\n",
+    "import matplotlib.pyplot as plt\n",
+    "import bqplot.scales\n",
+    "from IPython.display import display\n",
+    "import pythreejs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "515210bd-d7c9-4388-9201-191f851977ce",
+   "metadata": {},
+   "source": [
+    "## Installation"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "e485a9b6-4e52-4a09-bbf6-d761cbee568a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# from IPython.display import Image, display\n",
+    "\n",
+    "# # Using double backslashes to escape them\n",
+    "# # display(Image(\"C:\\\\Users\\\\harsh\\\\ASSIGNMENT 4\\\\WhatsApp Image 2025-02-24 at 00.08.38.jpeg\", width=300))\n",
+    "\n",
+    "# # Or using forward slashes\n",
+    "# display(Image(\"C:/Users/harsh/ASSIGNMENT 4/WhatsApp Image 2025-02-24 at 00.08.38.jpeg\"))\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a1269d76-9a07-44e8-8dee-a4cd0470b24b",
+   "metadata": {},
+   "source": [
+    "## Examples"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a29fb973-645a-41ad-bea1-76afdb2b5ffa",
+   "metadata": {},
+   "source": [
+    "### A simple scatter plot, plotting 1000 random points"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "64af3f96-67ff-4754-91ef-ea7dc445ee50",
+   "metadata": {},
+   "source": [
+    "\n",
+    "```python \n",
+    "import ipyvolume as ipv\n",
+    "import numpy as np\n",
+    "import ipywidgets as widgets\n",
+    "import matplotlib.pyplot as plt\n",
+    "import bqplot.scales\n",
+    "from IPython.display import display\n",
+    "import pythreejs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "004d8897-39e3-4673-bef6-57f90a1d9706",
+   "metadata": {},
+   "source": [
+    "**This code generates 1,000 random points in 3D space using a normal distribution and visualizes them using ipyvolume**\n",
+    "```python\n",
+    "\n",
+    "N = 1000  \n",
+    "x, y, z = np.random.normal(0, 1, (3, N))  \n",
+    "fig = ipv.figure()  \n",
+    "scatter = ipv.scatter(x, y, z)  \n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "4e987efc-185c-45f6-8843-88ff389a642a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "bf0522931dc24486870852df73c660a1",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(figure=Figure(box_center=[0.5, 0.5, 0.5], box_size=[1.0, 1.0, 1.0], camera=PerspectiveCamera(fov=45.…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "N = 1000\n",
+    "x, y, z = np.random.normal(0, 1, (3, N))\n",
+    "fig = ipv.figure()\n",
+    "scatter = ipv.scatter(x, y, z)\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c70d61c2-a3b1-4f84-92a1-0e889d2a495c",
+   "metadata": {},
+   "source": [
+    "### Plotting Surface"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c23f9eb6-1e98-4fe8-95a1-2a1e467cec47",
+   "metadata": {},
+   "source": [
+    "**This code creates a 3D surface plot of a function f(u, v) -> (u, v, uv^2) using ipyvolume**\n",
+    "```python\n",
+    "\n",
+    "# f(u, v) -> (u, v, u*v**2)\n",
+    "a = np.arange(-5, 5)\n",
+    "U, V = np.meshgrid(a, a)\n",
+    "X = U\n",
+    "Y = V\n",
+    "Z = X*Y**2\n",
+    "\n",
+    "ipv.figure()\n",
+    "ipv.plot_surface(X, Z, Y, color=\"orange\")\n",
+    "ipv.plot_wireframe(X, Z, Y, color=\"red\")\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "dd1d92fd-3516-4268-996a-7940fd1b6980",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "74984424a93c4b898f84280dfcb3e155",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(figure=Figure(box_center=[0.5, 0.5, 0.5], box_size=[1.0, 1.0, 1.0], camera=PerspectiveCamera(fov=45.…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# f(u, v) -> (u, v, u*v**2)\n",
+    "a = np.arange(-5, 5)\n",
+    "U, V = np.meshgrid(a, a)\n",
+    "X = U\n",
+    "Y = V\n",
+    "Z = X*Y**2\n",
+    "\n",
+    "ipv.figure()\n",
+    "ipv.plot_surface(X, Z, Y, color=\"orange\")\n",
+    "ipv.plot_wireframe(X, Z, Y, color=\"red\")\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "09df564f-2f77-439d-8f26-1ed33a420006",
+   "metadata": {},
+   "source": [
+    "### Texture mapping"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "149c4db0-595e-49ef-bff9-2a195cf02a8d",
+   "metadata": {},
+   "source": [
+    "**This code applies a PNG image as a texture to a 3D mesh surface using ipyvolume. It downloads an image, maps it to the surface using UV coordinates, and animates the texture shift across 8 frames to create a dynamic effect. The scene is displayed in dark mode with no wireframe.**\n",
+    "```python\n",
+    "\n",
+    "# import PIL.Image\n",
+    "# image = PIL.Image.open('data/jupyter.png')\n",
+    "# example how put a png as texture\n",
+    "import PIL.Image\n",
+    "import requests\n",
+    "import io\n",
+    "\n",
+    "url = 'https://vaex.io/img/logos/spiral-small.png'\n",
+    "r = requests.get(url, stream=True)\n",
+    "f = io.BytesIO(r.content)\n",
+    "image = PIL.Image.open(f)\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "ipv.style.use('dark')\n",
+    "# we create a sequence of 8 u v coordinates so that the texture moves across the surface.\n",
+    "u = np.array([X/5 +np.sin(k/8*np.pi)*4. for k in range(8)])\n",
+    "v = np.array([-Y/5*(1-k/7.) + Z*(k/7.) for k in range(8)])\n",
+    "mesh = ipv.plot_mesh(X, Z, Y, u=u, v=v, texture=image, wireframe=False)\n",
+    "ipv.animation_control(mesh, interval=800, sequence_length=8)\n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "b6d2dead-aaa0-4b7e-9628-ca8f405c17fd",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "2b1eca57413f4b4ba0dc04a47af078dd",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(children=[HBox(children=(Play(value=0, interval=800, max=7), IntSlider(value=0, max=7)))], figure=Fi…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# import PIL.Image\n",
+    "# image = PIL.Image.open('data/jupyter.png')\n",
+    "# example how put a png as texture\n",
+    "import PIL.Image\n",
+    "import requests\n",
+    "import io\n",
+    "\n",
+    "url = 'https://vaex.io/img/logos/spiral-small.png'\n",
+    "r = requests.get(url, stream=True)\n",
+    "f = io.BytesIO(r.content)\n",
+    "image = PIL.Image.open(f)\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "ipv.style.use('dark')\n",
+    "# we create a sequence of 8 u v coordinates so that the texture moves across the surface.\n",
+    "u = np.array([X/5 +np.sin(k/8*np.pi)*4. for k in range(8)])\n",
+    "v = np.array([-Y/5*(1-k/7.) + Z*(k/7.) for k in range(8)])\n",
+    "mesh = ipv.plot_mesh(X, Z, Y, u=u, v=v, texture=image, wireframe=False)\n",
+    "ipv.animation_control(mesh, interval=800, sequence_length=8)\n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3a5e7b06-33f0-495a-bb50-9949cb40d4ad",
+   "metadata": {},
+   "source": [
+    "### Basic animation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f631391a-0fab-4b35-9cc4-009a05a9353d",
+   "metadata": {},
+   "source": [
+    "**This code creates an animated 3D scatter plot using ipyvolume, where spheres oscillate based on a decaying cosine wave. The grid points (x, y) determine radial distances r, and the height z evolves over 15 time steps to create a wave-like animation.**\n",
+    "```python\n",
+    "\n",
+    "# create 2d grids: x, y, and r\n",
+    "u = np.linspace(-10, 10, 25)\n",
+    "x, y = np.meshgrid(u, u)\n",
+    "r = np.sqrt(x**2+y**2)\n",
+    "print(\"x,y and z are of shape\", x.shape)\n",
+    "# and turn them into 1d\n",
+    "x = x.flatten()\n",
+    "y = y.flatten()\n",
+    "r = r.flatten()\n",
+    "\n",
+    "# create a sequence of 15 time elements\n",
+    "time = np.linspace(0, np.pi*2, 15)\n",
+    "z = np.array([(np.cos(r + t) * np.exp(-r/5)) for t in time])\n",
+    "print(\"z is of shape\", z.shape)\n",
+    "\n",
+    "# draw the scatter plot, and add controls with animate_glyphs\n",
+    "ipv.figure()\n",
+    "s = ipv.scatter(x, z, y, marker=\"sphere\")\n",
+    "ipv.animation_control(s, interval=200)\n",
+    "ipv.ylim(-3,3)\n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "83a0a25a-1289-462a-9991-a51d26583d8e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "x,y and z are of shape (25, 25)\n",
+      "z is of shape (15, 625)\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "7b55794c562b4d36b97c547127b47cb0",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(children=[HBox(children=(Play(value=0, interval=200, max=14), IntSlider(value=0, max=14)))], figure=…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# create 2d grids: x, y, and r\n",
+    "u = np.linspace(-10, 10, 25)\n",
+    "x, y = np.meshgrid(u, u)\n",
+    "r = np.sqrt(x**2+y**2)\n",
+    "print(\"x,y and z are of shape\", x.shape)\n",
+    "# and turn them into 1d\n",
+    "x = x.flatten()\n",
+    "y = y.flatten()\n",
+    "r = r.flatten()\n",
+    "\n",
+    "# create a sequence of 15 time elements\n",
+    "time = np.linspace(0, np.pi*2, 15)\n",
+    "z = np.array([(np.cos(r + t) * np.exp(-r/5)) for t in time])\n",
+    "print(\"z is of shape\", z.shape)\n",
+    "\n",
+    "# draw the scatter plot, and add controls with animate_glyphs\n",
+    "ipv.figure()\n",
+    "s = ipv.scatter(x, z, y, marker=\"sphere\")\n",
+    "ipv.animation_control(s, interval=200)\n",
+    "ipv.ylim(-3,3)\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8fdf9bae-6ea4-4606-9eb9-cd23560b37be",
+   "metadata": {},
+   "source": [
+    "### Animated quiver"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5b0f0113-c3db-45f2-a832-ce6fc3163474",
+   "metadata": {},
+   "source": [
+    "**This code visualizes an animated 3D vector field using ipyvolume. It loads a predefined animated stream dataset, where each particle has position (x, y, z) and velocity (vx, vy, vz) over time. The quiver plot (ipv.quiver) animates 200 particles over 50 time steps, displaying red arrows that represent their motion in 3D space.**\n",
+    "```python\n",
+    "\n",
+    "import ipyvolume.datasets\n",
+    "stream = ipyvolume.datasets.animated_stream.fetch()\n",
+    "print(\"shape of steam data\", stream.data.shape) # first dimension contains x, y, z, vx, vy, vz, then time, then particle\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "# instead of doing x=stream.data[0], y=stream.data[1], ... vz=stream.data[5], use *stream.data\n",
+    "# limit to 50 timesteps to avoid having a huge notebook\n",
+    "q = ipv.quiver(*stream.data[:,0:50,:200], color=\"red\", size=7)\n",
+    "ipv.style.use(\"dark\") # looks better\n",
+    "ipv.animation_control(q, interval=200)\n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "a0373b2c-e35e-458e-a2a6-ebc84816e462",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "shape of steam data (6, 200, 1250)\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "389e135f2ae34ef4b3d2fd8b5a37c860",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(children=[HBox(children=(Play(value=0, interval=200, max=49), IntSlider(value=0, max=49)))], figure=…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import ipyvolume.datasets\n",
+    "stream = ipyvolume.datasets.animated_stream.fetch()\n",
+    "print(\"shape of steam data\", stream.data.shape) # first dimension contains x, y, z, vx, vy, vz, then time, then particle\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "# instead of doing x=stream.data[0], y=stream.data[1], ... vz=stream.data[5], use *stream.data\n",
+    "# limit to 50 timesteps to avoid having a huge notebook\n",
+    "q = ipv.quiver(*stream.data[:,0:50,:200], color=\"red\", size=7)\n",
+    "ipv.style.use(\"dark\") # looks better\n",
+    "ipv.animation_control(q, interval=200)\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1963b0ff-9334-48a1-8531-a17afcef5e66",
+   "metadata": {},
+   "source": [
+    "### Using scales"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c0af827f-095c-4795-917f-85f91ee6bb2c",
+   "metadata": {},
+   "source": [
+    "**This code creates a 3D scatter plot with logarithmic scaling on the x-axis using ipyvolume and bqplot.scales**\n",
+    "```python\n",
+    "\n",
+    "import bqplot.scales\n",
+    "\n",
+    "N = 500\n",
+    "x, y, z = np.random.normal(0, 1, (3, N))\n",
+    "x = 10**x\n",
+    "r = np.sqrt(np.log10(x)**2 + y**2 + z**2)\n",
+    "scales = {\n",
+    "    'x': bqplot.scales.LogScale(min=10**-3, max=10**3),\n",
+    "    'y': bqplot.scales.LinearScale(min=-3, max=3),\n",
+    "    'z': bqplot.scales.LinearScale(min=-3, max=3),\n",
+    "}\n",
+    "color_scale = bqplot.scales.ColorScale(min=0, max=3, colors=[\"#f00\", \"#0f0\", \"#00f\"])\n",
+    "fig = ipv.figure(scales=scales)\n",
+    "scatter = ipv.scatter(x, y, z, color=r, color_scale=color_scale)\n",
+    "ipv.view(150, 30, distance=2.5)\n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "b3ee2cdf-48b1-4c96-9ddb-c180e4d73b8d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "503bae5f95184c7988552bd8afcb9955",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(figure=Figure(box_center=[0.5, 0.5, 0.5], box_size=[1.0, 1.0, 1.0], camera=PerspectiveCamera(fov=45.…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import bqplot.scales\n",
+    "N = 500\n",
+    "x, y, z = np.random.normal(0, 1, (3, N))\n",
+    "x = 10**x\n",
+    "r = np.sqrt(np.log10(x)**2 + y**2 + z**2)\n",
+    "scales = {\n",
+    "    'x': bqplot.scales.LogScale(min=10**-3, max=10**3),\n",
+    "    'y': bqplot.scales.LinearScale(min=-3, max=3),\n",
+    "    'z': bqplot.scales.LinearScale(min=-3, max=3),\n",
+    "}\n",
+    "color_scale = bqplot.scales.ColorScale(min=0, max=3, colors=[\"#f00\", \"#0f0\", \"#00f\"])\n",
+    "fig = ipv.figure(scales=scales)\n",
+    "scatter = ipv.scatter(x, y, z, color=r, color_scale=color_scale)\n",
+    "ipv.view(150, 30, distance=2.5)\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "434573de-12b0-46e7-bd17-d872830216f1",
+   "metadata": {},
+   "source": [
+    "### Bar Charts"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c899b728-5fab-448b-9498-65aab9769089",
+   "metadata": {},
+   "source": [
+    "**This code creates an animated 3D scatter plot in ipyvolume, where color and box size dynamically change based on a cosine-based wave function. The scatter points are box-shaped, with their height (y-dimension) varying over time, and color mapped to the oscillating values.**\n",
+    "```python\n",
+    "\n",
+    "u_scale = 10\n",
+    "Nx, Ny = 30, 15\n",
+    "u = np.linspace(-u_scale, u_scale, Nx)\n",
+    "v = np.linspace(-u_scale, u_scale, Ny)\n",
+    "x, y = np.meshgrid(u, v, indexing='ij')\n",
+    "r = np.sqrt(x**2+y**2)\n",
+    "x = x.flatten()\n",
+    "y = y.flatten()\n",
+    "r = r.flatten()\n",
+    "\n",
+    "time = np.linspace(0, np.pi*2, 15)\n",
+    "z = np.array([(np.cos(r + t) * np.exp(-r/5)) for t in time])\n",
+    "zz = z\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "s = ipv.scatter(x, 0, y, aux=zz, marker=\"sphere\")\n",
+    "dx = u[1] - u[0]\n",
+    "dy = v[1] - v[0]\n",
+    "# make the x and z lim half a 'box' larger\n",
+    "ipv.xlim(-u_scale-dx/2, u_scale+dx/2)\n",
+    "ipv.zlim(-u_scale-dx/2, u_scale+dx/2)\n",
+    "ipv.ylim(-1.2, 1.2)\n",
+    "ipv.show()\n",
+    "\n",
+    "# make the size 1, in domain coordinates (so 1 unit as read of by the x-axis etc)\n",
+    "s.geo = 'box'\n",
+    "s.size = 1\n",
+    "s.size_x_scale = fig.scales['x']\n",
+    "s.size_y_scale = fig.scales['y']\n",
+    "s.size_z_scale = fig.scales['z']\n",
+    "s.shader_snippets = {'size':\n",
+    " 'size_vector.y = SCALE_SIZE_Y(aux_current); '\n",
+    "}\n",
+    "\n",
+    "s.shader_snippets = {'size':\n",
+    " 'size_vector.y = SCALE_SIZE_Y(aux_current) - SCALE_SIZE_Y(0.0) ; '\n",
+    "}\n",
+    "\n",
+    "s.geo_matrix = [dx, 0, 0, 0,   0, 1, 0, 0,   0, 0, dy, 0,  0.0, 0.5, 0, 1]\n",
+    "\n",
+    "# since we see the boxes with negative sizes inside out, we made the material double sided\n",
+    "s.material.side = \"DoubleSide\"\n",
+    "# Now also include, color, which containts rgb values\n",
+    "color = np.array([[np.cos(r + t), 1-np.abs(z[i]), 0.1+z[i]*0] for i, t in enumerate(time)])\n",
+    "color = np.transpose(color, (0, 2, 1)) # flip the last axes\n",
+    "s.color = color\n",
+    "ipv.animation_control(s, interval=200)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "da18827a-7a41-49ad-a63e-f7271f461369",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "ded965dcab7648e2b5ebbe1b69b4f00f",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(figure=Figure(box_center=[0.5, 0.5, 0.5], box_size=[1.0, 1.0, 1.0], camera=PerspectiveCamera(fov=45.…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "u_scale = 10\n",
+    "Nx, Ny = 30, 15\n",
+    "u = np.linspace(-u_scale, u_scale, Nx)\n",
+    "v = np.linspace(-u_scale, u_scale, Ny)\n",
+    "x, y = np.meshgrid(u, v, indexing='ij')\n",
+    "r = np.sqrt(x**2+y**2)\n",
+    "x = x.flatten()\n",
+    "y = y.flatten()\n",
+    "r = r.flatten()\n",
+    "\n",
+    "time = np.linspace(0, np.pi*2, 15)\n",
+    "z = np.array([(np.cos(r + t) * np.exp(-r/5)) for t in time])\n",
+    "zz = z\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "s = ipv.scatter(x, 0, y, aux=zz, marker=\"sphere\")\n",
+    "dx = u[1] - u[0]\n",
+    "dy = v[1] - v[0]\n",
+    "# make the x and z lim half a 'box' larger\n",
+    "ipv.xlim(-u_scale-dx/2, u_scale+dx/2)\n",
+    "ipv.zlim(-u_scale-dx/2, u_scale+dx/2)\n",
+    "ipv.ylim(-1.2, 1.2)\n",
+    "ipv.show()\n",
+    "\n",
+    "# make the size 1, in domain coordinates (so 1 unit as read of by the x-axis etc)\n",
+    "s.geo = 'box'\n",
+    "s.size = 1\n",
+    "s.size_x_scale = fig.scales['x']\n",
+    "s.size_y_scale = fig.scales['y']\n",
+    "s.size_z_scale = fig.scales['z']\n",
+    "s.shader_snippets = {'size':\n",
+    " 'size_vector.y = SCALE_SIZE_Y(aux_current); '\n",
+    "}\n",
+    "\n",
+    "s.shader_snippets = {'size':\n",
+    " 'size_vector.y = SCALE_SIZE_Y(aux_current) - SCALE_SIZE_Y(0.0) ; '\n",
+    "}\n",
+    "\n",
+    "s.geo_matrix = [dx, 0, 0, 0,   0, 1, 0, 0,   0, 0, dy, 0,  0.0, 0.5, 0, 1]\n",
+    "\n",
+    "# since we see the boxes with negative sizes inside out, we made the material double sided\n",
+    "s.material.side = \"DoubleSide\"\n",
+    "# Now also include, color, which containts rgb values\n",
+    "color = np.array([[np.cos(r + t), 1-np.abs(z[i]), 0.1+z[i]*0] for i, t in enumerate(time)])\n",
+    "color = np.transpose(color, (0, 2, 1)) # flip the last axes\n",
+    "s.color = color\n",
+    "ipv.animation_control(s, interval=200)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "feb2db74-c847-4911-86fa-66061de88092",
+   "metadata": {},
+   "source": [
+    "### Animation with shadow"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cc0d95d7-283c-42f7-9308-1170bc8f8c66",
+   "metadata": {},
+   "source": [
+    "**This code visualizes an animated 3D vector field using ipyvolume, where quiver arrows represent particle motion from a dataset. It adds lighting effects and planes for better visualization while using a dark theme for contrast. The animation updates at 200ms intervals to show the evolution of the vector field over time.**\n",
+    "```python\n",
+    "\n",
+    "import ipyvolume as ipv\n",
+    "import ipyvolume.datasets\n",
+    "stream = ipyvolume.datasets.animated_stream.fetch()\n",
+    "print(\"shape of steam data\", stream.data.shape) # first dimension contains x, y, z, vx, vy, vz, then time, then particle\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "# instead of doing x=stream.data[0], y=stream.data[1], ... vz=stream.data[5], use *stream.data\n",
+    "# limit to 50 timesteps to avoid having a huge notebook\n",
+    "ipv.material_physical()\n",
+    "# q = ipv.quiver(*stream.data[:,0:200:10,:2000:10], color=\"red\", size=7)\n",
+    "q = ipv.quiver(*stream.data, color=\"red\", size=7)\n",
+    "ipv.style.use(\"dark\") # looks better\n",
+    "m = ipv.plot_plane('bottom')\n",
+    "m = ipv.plot_plane('back')\n",
+    "m = ipv.plot_plane('left')\n",
+    "ipv\n",
+    "l = ipv.light_directional(position=[20, 50, 20], shadow_camera_orthographic_size=1, far=140, near=0.1);\n",
+    "ipv.animation_control(q, interval=200)\n",
+    "ipv.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "d8849c6c-b2f6-4aff-93ed-cb8be11afb1e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "shape of steam data (6, 200, 1250)\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "370b3e111877418bb45bdf7798940009",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(children=[HBox(children=(Play(value=0, interval=200, max=199), IntSlider(value=0, max=199)))], figur…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import ipyvolume.datasets\n",
+    "stream = ipyvolume.datasets.animated_stream.fetch()\n",
+    "print(\"shape of steam data\", stream.data.shape) # first dimension contains x, y, z, vx, vy, vz, then time, then particle\n",
+    "\n",
+    "fig = ipv.figure()\n",
+    "# instead of doing x=stream.data[0], y=stream.data[1], ... vz=stream.data[5], use *stream.data\n",
+    "# limit to 50 timesteps to avoid having a huge notebook\n",
+    "ipv.material_physical()\n",
+    "# q = ipv.quiver(*stream.data[:,0:200:10,:2000:10], color=\"red\", size=7)\n",
+    "q = ipv.quiver(*stream.data, color=\"red\", size=7)\n",
+    "ipv.style.use(\"dark\") # looks better\n",
+    "m = ipv.plot_plane('bottom')\n",
+    "m = ipv.plot_plane('back')\n",
+    "m = ipv.plot_plane('left')\n",
+    "ipv\n",
+    "l = ipv.light_directional(position=[20, 50, 20], shadow_camera_orthographic_size=1, far=140, near=0.1);\n",
+    "ipv.animation_control(q, interval=200)\n",
+    "ipv.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "177dbbcb-6500-4194-b32f-35fc1e1690ec",
+   "metadata": {},
+   "source": [
+    "### Planet Orbits and Visualization\n",
+    "```python\n",
+    "import numpy as np\n",
+    "import ipyvolume as ipv\n",
+    "import ipywidgets as widgets\n",
+    "\n",
+    "# Planet names\n",
+    "planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\n",
+    "colors_rgb = np.array([\n",
+    "    (0.55, 0.55, 0.55),  # Mercury - Grayish\n",
+    "    (0.98, 0.82, 0.15),  # Venus - Pale yellow\n",
+    "    (0.0, 0.4, 1.0),     # Earth - Deep blue with land reflections\n",
+    "    (0.8, 0.3, 0.1),     # Mars - Reddish brown\n",
+    "    (0.9, 0.6, 0.3),     # Jupiter - Orange with brown bands\n",
+    "    (0.9, 0.8, 0.6),     # Saturn - Pale yellowish-beige\n",
+    "    (0.4, 0.8, 0.9),     # Uranus - Cyan/Light Blue\n",
+    "    (0.1, 0.1, 0.7)      # Neptune - Deep Blue\n",
+    "])\n",
+    "\n",
+    "# Densities and other planet properties\n",
+    "densities = np.array([5.43, 5.24, 5.51, 3.93, 1.33, 0.69, 1.27, 1.64])\n",
+    "alpha_values = 0.3 + 0.7 * (densities / np.max(densities))\n",
+    "\n",
+    "semi_major_axes = np.array([58, 108, 149, 228, 778, 1427, 2871, 4497])*(10**6)\n",
+    "eccentricities = np.array([0.206, 0.007, 0.017, 0.093, 0.048, 0.056, 0.046, 0.010])\n",
+    "inclinations = np.array([7.00, 3.4, 0.00, 1.8, 1.3, 2.5, 0.8, 1.8]) * (np.pi / 180)  # Convert to radians\n",
+    "\n",
+    "real_distances = np.array([0.31, 0.72, 0.98, 1.38, 4.95, 9.01, 18.28, 29.80])*1.496*(10**8)\n",
+    "real_diameter = np.array([4878, 12100, 12756, 6794, 142800, 120000, 52400, 48400])\n",
+    "real_radii = real_diameter / 2\n",
+    "sun_radius = 696340\n",
+    "\n",
+    "# Scaling factors\n",
+    "scale_factor_distance = 0.00001\n",
+    "scale_factor_size = 0.0001\n",
+    "\n",
+    "scaled_distances = scale_factor_distance * real_distances\n",
+    "scaled_radii = scale_factor_size * real_radii\n",
+    "scaled_semi_major_axes = semi_major_axes * scale_factor_distance  # Scaled distances\n",
+    "\n",
+    "orbital_periods = np.array([88, 225, 365, 687, 4333, 10759, 30687, 60190])\n",
+    "\n",
+    "# Angular speeds of planets\n",
+    "angular_speeds = 50 * ((2 * np.pi) / orbital_periods)\n",
+    "time = np.linspace(0, 1000 * np.pi, 6000)\n",
+    "\n",
+    "# Calculate x, y, z positions over time\n",
+    "x, y, z = [], [], []  # For x, y, z positions over time using elliptical orbits\n",
+    "for i in range(len(planets)):\n",
+    "    theta = angular_speeds[i] * time  # Angle for each time step\n",
+    "    r = (scaled_semi_major_axes[i] * (1 - eccentricities[i]**2)) / (1 + eccentricities[i] * np.cos(theta))\n",
+    "    \n",
+    "    x_orbit = r * np.cos(theta)\n",
+    "    y_orbit = r * np.sin(theta)\n",
+    "    z_orbit = np.zeros_like(theta)  # Initially in the XY plane\n",
+    "    \n",
+    "    y_tilted = y_orbit * np.cos(inclinations[i]) - z_orbit * np.sin(inclinations[i])  # for inclination\n",
+    "    z_tilted = y_orbit * np.sin(inclinations[i]) + z_orbit * np.cos(inclinations[i])\n",
+    "    \n",
+    "    x.append(x_orbit)\n",
+    "    y.append(y_tilted)\n",
+    "    z.append(z_tilted)\n",
+    "\n",
+    "x = np.array(x).T\n",
+    "y = np.array(y).T\n",
+    "z = np.array(z).T\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "926d81bc-fb19-4348-ad79-5d480fab1f62",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "637a8e3f839546319f4ed5e5d23a85d1",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Dropdown(description='Select:', options=('Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', '…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "c85888e789884e2bac2f0f47de3ce1d4",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "IntSlider(value=0, description='Time Frame', max=5999)"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "65e3a0a2daba441b8c825d70e92659fd",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "HTML(value='(460.52, 0.00, 0.00)')"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "4e34cbc3b7404cb886816726dbab88bb",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Container(children=[HBox(children=(Play(value=0, max=5999), IntSlider(value=0, max=5999)))], figure=Figure(ani…"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# Planet names\n",
+    "planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\n",
+    "colors_rgb = np.array([\n",
+    "    (0.55, 0.55, 0.55),  # Mercury - Grayish\n",
+    "    (0.98, 0.82, 0.15),  # Venus - Pale yellow\n",
+    "    (0.0, 0.4, 1.0),     # Earth - Deep blue with land reflections\n",
+    "    (0.8, 0.3, 0.1),     # Mars - Reddish brown\n",
+    "    (0.9, 0.6, 0.3),     # Jupiter - Orange with brown bands\n",
+    "    (0.9, 0.8, 0.6),     # Saturn - Pale yellowish-beige\n",
+    "    (0.4, 0.8, 0.9),     # Uranus - Cyan/Light Blue\n",
+    "    (0.1, 0.1, 0.7)      # Neptune - Deep Blue\n",
+    "])\n",
+    "densities = np.array([5.43, 5.24, 5.51, 3.93, 1.33, 0.69, 1.27, 1.64])\n",
+    "alpha_values = 0.3 + 0.7 * (densities / np.max(densities))\n",
+    "\n",
+    "semi_major_axes = np.array([58, 108, 149, 228, 778, 1427, 2871, 4497])*(10**6)\n",
+    "eccentricities = np.array([0.206, 0.007, 0.017, 0.093, 0.048, 0.056, 0.046, 0.010])\n",
+    "inclinations = np.array([7.00, 3.4, 0.00, 1.8, 1.3, 2.5, 0.8, 1.8]) * (np.pi / 180)  # Convert to radians\n",
+    "\n",
+    "real_distances = np.array([0.31, 0.72, 0.98, 1.38, 4.95, 9.01, 18.28, 29.80])*1.496*(10**8)\n",
+    "real_diameter = np.array([4878, 12100, 12756, 6794, 142800, 120000, 52400, 48400])\n",
+    "real_radii = real_diameter/2\n",
+    "sun_radius = 696340 \n",
+    "\n",
+    "scale_factor_distance = 0.00001\n",
+    "scale_factor_size = 0.0001\n",
+    "\n",
+    "scaled_distances = scale_factor_distance*real_distances\n",
+    "scaled_radii = scale_factor_size*real_radii\n",
+    "\n",
+    "scaled_semi_major_axes = semi_major_axes * scale_factor_distance  # Scaled distances\n",
+    "\n",
+    "orbital_periods = np.array([88, 225, 365, 687, 4333, 10759, 30687, 60190])\n",
+    "\n",
+    "angular_speeds = 50*((2 * np.pi) / orbital_periods)\n",
+    "time = np.linspace(0, 1000 * np.pi, 6000)\n",
+    "\n",
+    "x, y, z = [], [], []  # For x, y, z positions over time using elliptical orbits\n",
+    "for i in range(len(planets)):\n",
+    "    theta = angular_speeds[i] * time  # Angle for each time step\n",
+    "    r = (scaled_semi_major_axes[i] * (1 - eccentricities[i]**2)) / (1 + eccentricities[i] * np.cos(theta))\n",
+    "    \n",
+    "    x_orbit = r * np.cos(theta)\n",
+    "    y_orbit = r * np.sin(theta)\n",
+    "    z_orbit = np.zeros_like(theta)  # Initially in the XY plane\n",
+    "    \n",
+    "    y_tilted = y_orbit * np.cos(inclinations[i]) - z_orbit * np.sin(inclinations[i])  # for inclination\n",
+    "    z_tilted = y_orbit * np.sin(inclinations[i]) + z_orbit * np.cos(inclinations[i])\n",
+    "    \n",
+    "    x.append(x_orbit)\n",
+    "    y.append(y_tilted)\n",
+    "    z.append(z_tilted)\n",
+    "\n",
+    "x = np.array(x).T\n",
+    "y = np.array(y).T\n",
+    "z = np.array(z).T\n",
+    "\n",
+    "fig = ipv.figure(width = 1000, height = 800)\n",
+    "\n",
+    "planet_scatter = ipv.scatter(x, y, z, size=scaled_radii, marker=\"sphere\", color=colors_rgb, opacity = alpha_values)\n",
+    "# for i, (radius, density, color) in enumerate(zip(scaled_radii, densities, colors)):\n",
+    "#     ipv.scatter([i*10], [0], [0], size=radius, marker=\"sphere\", color=color, alpha=density/6)\n",
+    "\n",
+    "theta_full = np.linspace(0, 2 * np.pi, 100)  # 100 points for smooth ellipses\n",
+    "for i in range(len(planets)):\n",
+    "    r_full = (scaled_semi_major_axes[i] * (1 - eccentricities[i]**2)) / (1 + eccentricities[i] * np.cos(theta_full))\n",
+    "    \n",
+    "    x_orbit = r_full * np.cos(theta_full)\n",
+    "    y_orbit = r_full * np.sin(theta_full)\n",
+    "    z_orbit = np.zeros_like(theta_full)\n",
+    "    \n",
+    "    y_tilted = y_orbit * np.cos(inclinations[i]) - z_orbit * np.sin(inclinations[i])\n",
+    "    z_tilted = y_orbit * np.sin(inclinations[i]) + z_orbit * np.cos(inclinations[i])\n",
+    "    \n",
+    "    ipv.plot(x_orbit, y_tilted, z_tilted, color=\"gray\")\n",
+    "\n",
+    "dropdown = widgets.Dropdown(options=planets, description=\"Select:\")\n",
+    "info_label = widgets.HTML(value = \"Select a planet to see details\")\n",
+    "\n",
+    "def update_info(change):\n",
+    "    selected_planet = dropdown.value\n",
+    "    index = planets.index(selected_planet)\n",
+    "    frame = frame_slider.value\n",
+    "    current_x = x[frame, index]\n",
+    "    current_y = y[frame, index]\n",
+    "    current_z = z[frame, index]\n",
+    "    planet_info = f\"({current_x:.2f}, {current_y:.2f}, {current_z:.2f})\"\n",
+    "    \n",
+    "    info_label.value = planet_info  # Update display\n",
+    "    # print(f\"Selected: {selected_planet}, Index: {index}, Coordinates: ({current_x}, {current_y}, {current_z})\")\n",
+    "\n",
+    "frame_slider = widgets.IntSlider(min=0, max=len(time)-1, step=1, description=\"Time Frame\")\n",
+    "frame_slider.observe(update_info, names=\"value\")\n",
+    "update_info(None)\n",
+    "\n",
+    "dropdown.observe(update_info, names=\"value\")\n",
+    "display(dropdown, frame_slider, info_label)\n",
+    "\n",
+    "ipv.animation_control(planet_scatter, interval=100)\n",
+    "ipv.style.use(\"dark\") \n",
+    "ipv.show()\n",
+    "# control = pythreejs.OrbitControls(controlling=fig.camera)\n",
+    "# # assigning to fig.controls will overwrite the builtin controls\n",
+    "# fig.controls = control\n",
+    "# control.autoRotate = True\n",
+    "# # the controls does not update itself, but if we toggle this setting, ipyvolume will update the controls\n",
+    "# fig.render_continuous = True"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "2b6235c0-8cd5-476c-b86f-6b6cafa25cf6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from ipywidgets import embed\n",
+    "import ipyvolume as ipv\n",
+    "import numpy as np\n",
+    "\n",
+    "# Create your animated visualization\n",
+    "x, y, z = np.random.random((3, 100))\n",
+    "scatter = ipv.scatter(x, y, z, size=1, marker=\"sphere\")\n",
+    "ipv.animation_control(scatter, interval=200)  # Adjust animation speed\n",
+    "\n",
+    "# Export to HTML\n",
+    "embed.embed_minimal_html('ipyvolum_animation.html', views=[ipv.gcc()], title='Animated 3D Visualization')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "54cbf5cb-8110-4869-9bfa-04c8818e329b",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "740077c4-f82e-42ba-bf5b-357be5169af5",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3addc3a3-bf6c-41c7-a2e5-933fec9b197a",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
